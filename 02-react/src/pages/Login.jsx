@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Login = () => {
@@ -9,6 +10,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const setdata = await axios.post("", loginData);
+
+      setLoginData({ email: "", password: "" });
+
+      localStorage.setItem("jwttoken", setdata.data.token);
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
   };
   return (
     <>
